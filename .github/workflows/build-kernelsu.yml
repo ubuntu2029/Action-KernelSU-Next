@@ -58,19 +58,16 @@ jobs:
         rm kernel_platform/msm-kernel/android/abi_gki_protected_exports_* || echo "No protected exports!"
         sed -i 's/ -dirty//g' kernel_platform/common/scripts/setlocalversion
         sed -i 's/ -dirty//g' kernel_platform/msm-kernel/scripts/setlocalversion
-        cd kernel_platform
-        cat common/arch/arm64/configs/gki_defconfig > msm-kernel/arch/arm64/configs/gki_defconfig
-        find ./ | grep -iw _setup_env.sh
+
      - name: Set up KernelSU
        run: |
         cd kernel_workspace/kernel_platform
         curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
-        find ./ | grep -iw _setup_env.sh
       
      - name: Build kernel
        run: |
         cd kernel_workspace
-        sed -i '22s/build_cmd/#build_cmd/' ./kernel_platform/oplus/build/oplus_build_kernel.sh
+        cp -a ~/oplus_build_kernel.sh ./kernel_platform/oplus/build/oplus_build_kernel.sh
         # export LTO=thin
         ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
 
