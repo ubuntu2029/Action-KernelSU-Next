@@ -60,17 +60,20 @@ jobs:
         sed -i 's/ -dirty//g' kernel_platform/msm-kernel/scripts/setlocalversion
         cd kernel_platform
         cat common/arch/arm64/configs/gki_defconfig > msm-kernel/arch/arm64/configs/gki_defconfig
-
+        find ./ | grep -iw _setup_env.sh
      - name: Set up KernelSU
        run: |
         cd kernel_workspace/kernel_platform
         curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
+        find ./ | grep -iw _setup_env.sh
       
      - name: Build kernel
        run: |
         cd kernel_workspace
+        find ./ | grep -iw _setup_env.sh
         # export LTO=thin
         ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
+        find ./ | grep -iw _setup_env.sh
 
      - name: Make AnyKernel3
        run: |
