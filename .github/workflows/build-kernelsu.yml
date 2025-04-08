@@ -70,10 +70,9 @@ jobs:
      - name: Build kernel
        run: |
         cd kernel_workspace
-        find ./ | grep -iw _setup_env.sh
+        sed -i '22s/build_cmd/#build_cmd/' ./kernel_platform/oplus/build/oplus_build_kernel.sh
         # export LTO=thin
         ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
-        find ./ | grep -iw _setup_env.sh
 
      - name: Make AnyKernel3
        run: |
