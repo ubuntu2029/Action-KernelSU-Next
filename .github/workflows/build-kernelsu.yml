@@ -58,7 +58,12 @@ jobs:
         rm kernel_platform/msm-kernel/android/abi_gki_protected_exports_* || echo "No protected exports!"
         sed -i 's/ -dirty//g' kernel_platform/common/scripts/setlocalversion
         sed -i 's/ -dirty//g' kernel_platform/msm-kernel/scripts/setlocalversion
-        cd /home/thomas/actions-runner/_work/Action-KernelSU-Next/Action-KernelSU-Next/kernel_workspace/kernel_platform && cat common/arch/arm64/configs/gki_defconfig > msm-kernel/common/arch/arm64/configs/gki_defconfig
+     - name: Path checking
+       run: |
+        cd /home/thomas/actions-runner/_work/Action-KernelSU-Next/Action-KernelSU-Next/kernel_workspace/kernel_platform
+        pwd
+        ls common/arch/arm64/configs/gki_defconfig 
+        ls msm-kernel/common/arch/arm64/configs/gki_defconfig
 
      - name: Set up KernelSU
        run: |
