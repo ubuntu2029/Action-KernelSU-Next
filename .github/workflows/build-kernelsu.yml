@@ -68,6 +68,7 @@ jobs:
        run: |
         cd kernel_workspace
         cp -a ~/oplus_build_kernel.sh ./kernel_platform/oplus/build/oplus_build_kernel.sh
+        cp -a ~/_setup_env.sh     ./kernel_platform/build/kernel/_setup_env.sh
         # export LTO=thin
         ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
 
